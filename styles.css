@@ -1,0 +1,276 @@
+/* 203 Sports Academy - Cafeteria Menu Display
+   Optimized for 1920x1080 (55" TV)
+   Brand Colors: #007ad9 (blue), #333 (text), #ffba01 (gold), #005b9f (deep blue)
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+    -webkit-font-smoothing: antialiased;
+}
+
+.menu-container {
+    width: 1920px;
+    height: 1080px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #007ad9 0%, #005b9f 100%);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 122, 217, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1));
+}
+
+.logo-section {
+    flex-shrink: 0;
+}
+
+.logo {
+    height: 90px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    margin-right: 30px;
+}
+
+.title-section {
+    flex-grow: 1;
+}
+
+.title-section h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.title-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #8dcdff;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+.header-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ffba01, #ffd54f, #ffba01);
+}
+
+/* Menu Grid */
+.menu-grid {
+    display: grid;
+    grid-template-columns: 140px repeat(5, 1fr);
+    grid-template-rows: 60px repeat(3, 1fr);
+    gap: 8px;
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+/* Day Headers */
+.day-header {
+    background: linear-gradient(180deg, #007ad9 0%, #005b9f 100%);
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 10px rgba(0, 122, 217, 0.2);
+}
+
+.day-header .date {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.85;
+    margin-top: 2px;
+    letter-spacing: 1px;
+}
+
+.day-header.corner {
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Meal Labels */
+.meal-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+}
+
+.meal-label .meal-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    transform: rotate(180deg);
+}
+
+.meal-label.breakfast {
+    background: linear-gradient(180deg, #ffba01 0%, #f5a000 100%);
+    color: #333333;
+}
+
+.meal-label.lunch {
+    background: linear-gradient(180deg, #34a835 0%, #2d8f2e 100%);
+    color: #ffffff;
+}
+
+.meal-label.dinner {
+    background: linear-gradient(180deg, #9c27b0 0%, #7b1fa2 100%);
+    color: #ffffff;
+}
+
+/* Meal Cells */
+.meal-cell {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 12px 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.meal-cell ul {
+    list-style: none;
+    flex-grow: 1;
+}
+
+.meal-cell li {
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 2px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.meal-cell li:last-child {
+    border-bottom: none;
+}
+
+.meal-cell li.entree {
+    font-weight: 700;
+    color: #007ad9;
+    font-size: 16px;
+}
+
+.meal-cell li.dessert {
+    color: #9c27b0;
+    font-style: italic;
+}
+
+/* Special Day Badges */
+.special-day {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.special-day.chipotle {
+    background: linear-gradient(90deg, #d32f2f, #c62828);
+    color: #ffffff;
+}
+
+.special-day.burger {
+    background: linear-gradient(90deg, #ff8f00, #f57c00);
+    color: #ffffff;
+}
+
+/* Breakfast cell styling */
+.meal-cell.breakfast {
+    border-top: 3px solid #ffba01;
+}
+
+/* Lunch cell styling */
+.meal-cell.lunch {
+    border-top: 3px solid #34a835;
+}
+
+/* Dinner cell styling */
+.meal-cell.dinner {
+    border-top: 3px solid #9c27b0;
+}
+
+/* Footer */
+.footer {
+    background: #333333;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.footer p {
+    margin: 0;
+}
+
+/* Subtle animation for digital display */
+@keyframes subtle-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+}
+
+.menu-container {
+    animation: subtle-pulse 4s ease-in-out infinite;
+}
