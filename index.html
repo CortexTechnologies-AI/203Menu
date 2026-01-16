@@ -103,7 +103,7 @@
         .info-panel {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
+            align-items: flex-start;
             gap: 0.5vh;
             min-width: 12vw;
         }
@@ -125,7 +125,7 @@
         .clock-display .ampm {
             font-family: 'Montserrat', sans-serif;
             font-size: 2vh;
-            font-weight: 600;
+            font-weight: 800;
             color: #00b8e6;
         }
 
@@ -631,9 +631,9 @@
         }
 
         // Weather - Open-Meteo API (free, no key needed)
-        // 203 Sports Academy is in Wallingford, CT area
-        const LAT = 41.45;
-        const LON = -72.82;
+        // Stamford, CT
+        const LAT = 41.05;
+        const LON = -73.54;
 
         async function fetchWeather() {
             try {
