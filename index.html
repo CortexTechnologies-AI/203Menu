@@ -99,15 +99,68 @@
             margin-top: 0.5vh;
         }
 
-        .header-badge {
-            background: #00D4FF;
-            color: #000;
-            padding: 1vh 1.5vw;
+        /* Info Panel - Clock, Weather, Sun */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5vh;
+            min-width: 12vw;
+        }
+
+        .clock-display {
+            display: flex;
+            align-items: baseline;
+            gap: 0.3vw;
+        }
+
+        .clock-display .time {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.8vh;
-            font-weight: 700;
+            font-size: 4vh;
+            font-weight: 800;
+            color: #111;
             letter-spacing: 0.1vw;
-            text-transform: uppercase;
+        }
+
+        .clock-display .ampm {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2vh;
+            font-weight: 600;
+            color: #00b8e6;
+        }
+
+        .weather-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5vw;
+        }
+
+        .weather-display .temp {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5vh;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .weather-display .condition {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.6vh;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .sun-display {
+            display: flex;
+            gap: 1vw;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.4vh;
+            color: #666;
+        }
+
+        .sun-item {
+            display: flex;
+            align-items: center;
+            gap: 0.2vw;
         }
 
         /* Menu Grid */
@@ -357,7 +410,20 @@
                 <h1>WEEKLY MENU</h1>
                 <h2>JANUARY 19 - 23, 2026</h2>
             </div>
-            <div class="header-badge">FUEL YOUR PERFORMANCE</div>
+            <div class="info-panel">
+                <div class="clock-display">
+                    <span class="time" id="clock">--:--</span>
+                    <span class="ampm" id="ampm">--</span>
+                </div>
+                <div class="weather-display">
+                    <span class="temp" id="temp">--°</span>
+                    <span class="condition" id="condition">Loading...</span>
+                </div>
+                <div class="sun-display">
+                    <span class="sun-item">☀️ <span id="sunrise">--:--</span></span>
+                    <span class="sun-item">🌙 <span id="sunset">--:--</span></span>
+                </div>
+            </div>
         </header>
 
         <!-- Menu Grid -->
@@ -546,5 +612,102 @@
             <p><span>Grilled Chicken</span> & <span>Salad Bar</span> available daily &bull; Fresh fruit & beverages at every meal</p>
         </footer>
     </div>
+
+    <script>
+        // Clock - Updates every second (EST timezone)
+        function updateClock() {
+            const now = new Date();
+            const options = {
+                timeZone: 'America/New_York',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            };
+            const timeStr = now.toLocaleTimeString('en-US', options);
+            const [time, ampm] = timeStr.split(' ');
+
+            document.getElementById('clock').textContent = time;
+            document.getElementById('ampm').textContent = ampm;
+        }
+
+        // Weather - Open-Meteo API (free, no key needed)
+        // 203 Sports Academy is in Wallingford, CT area
+        const LAT = 41.45;
+        const LON = -72.82;
+
+        async function fetchWeather() {
+            try {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weather_code&daily=sunrise,sunset&temperature_unit=fahrenheit&timezone=America/New_York`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                // Current temperature
+                const temp = Math.round(data.current.temperature_2m);
+                document.getElementById('temp').textContent = `${temp}°F`;
+
+                // Weather condition from code
+                const condition = getWeatherCondition(data.current.weather_code);
+                document.getElementById('condition').textContent = condition;
+
+                // Sunrise/Sunset (today)
+                const sunrise = formatTime(data.daily.sunrise[0]);
+                const sunset = formatTime(data.daily.sunset[0]);
+                document.getElementById('sunrise').textContent = sunrise;
+                document.getElementById('sunset').textContent = sunset;
+
+            } catch (error) {
+                console.error('Weather fetch failed:', error);
+                document.getElementById('condition').textContent = 'Unavailable';
+            }
+        }
+
+        function formatTime(isoString) {
+            const date = new Date(isoString);
+            return date.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true,
+                timeZone: 'America/New_York'
+            }).replace(' ', '');
+        }
+
+        function getWeatherCondition(code) {
+            const conditions = {
+                0: 'Clear ☀️',
+                1: 'Mostly Clear 🌤️',
+                2: 'Partly Cloudy ⛅',
+                3: 'Overcast ☁️',
+                45: 'Foggy 🌫️',
+                48: 'Icy Fog 🌫️',
+                51: 'Light Drizzle 🌧️',
+                53: 'Drizzle 🌧️',
+                55: 'Heavy Drizzle 🌧️',
+                61: 'Light Rain 🌧️',
+                63: 'Rain 🌧️',
+                65: 'Heavy Rain 🌧️',
+                66: 'Freezing Rain 🌨️',
+                67: 'Heavy Freezing Rain 🌨️',
+                71: 'Light Snow ❄️',
+                73: 'Snow ❄️',
+                75: 'Heavy Snow ❄️',
+                77: 'Snow Grains ❄️',
+                80: 'Light Showers 🌦️',
+                81: 'Showers 🌦️',
+                82: 'Heavy Showers 🌦️',
+                85: 'Light Snow Showers 🌨️',
+                86: 'Snow Showers 🌨️',
+                95: 'Thunderstorm ⛈️',
+                96: 'Thunderstorm w/ Hail ⛈️',
+                99: 'Severe Thunderstorm ⛈️'
+            };
+            return conditions[code] || 'Unknown';
+        }
+
+        // Initialize
+        updateClock();
+        setInterval(updateClock, 1000);
+        fetchWeather();
+        setInterval(fetchWeather, 600000); // Refresh weather every 10 min
+    </script>
 </body>
 </html>
