@@ -233,6 +233,7 @@
             border-left: 0.15vw solid #2a3038;
             border-right: 0.15vw solid #2a3038;
             border-bottom: 0.15vw solid #2a3038;
+            position: relative;
         }
 
         .meal-cell.breakfast { border-top: 0.3vh solid #00D4FF; }
@@ -255,13 +256,14 @@
         .special-badge.chipotle { background: #FF3B30; color: #fff; }
         .special-badge.burger { background: #FF9500; color: #000; }
 
-        /* Special Day Logos */
+        /* Special Day Logos - positioned in upper right */
         .special-logo {
-            height: 3vh;
-            width: auto;
-            margin-bottom: 0.4vh;
+            position: absolute;
+            top: 0.5vh;
+            right: 0.5vw;
+            height: 6vh;
+            width: 6vh;
             object-fit: contain;
-            align-self: flex-start;
         }
 
         /* Menu Items */
