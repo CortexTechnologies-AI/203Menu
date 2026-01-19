@@ -23,9 +23,9 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: linear-gradient(180deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+            background: #ffffff;
             font-family: 'Roboto', -apple-system, sans-serif;
-            color: #ffffff;
+            color: #333333;
         }
 
         /* 3D Flip Container */
@@ -40,7 +40,7 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1);
+            /* transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1); DISABLED */
         }
 
         .flip-container.flipped {
@@ -70,38 +70,24 @@
             flex-direction: column;
             padding: 1.5vh 1.5vw;
             box-sizing: border-box;
-            background: linear-gradient(180deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+            background: #ffffff;
         }
 
-        /* Header - Hockey Jersey Style */
+        /* Header */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 1.5vh 3vw;
-            background: #f0f2f5;
-            border-bottom: 0.5vh solid #00D4FF;
+            background: #f5f5f5;
+            border-bottom: 0.3vh solid #333;
             margin-bottom: 1vh;
             position: relative;
             flex-shrink: 0;
-            box-shadow: 0 0.3vh 1.5vh rgba(0, 212, 255, 0.5);
         }
 
         .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 0.8vh;
-            background: linear-gradient(
-                90deg,
-                #00D4FF 0%, #00ffff 15%, #00D4FF 30%,
-                #111 33.33%, #111 66.66%,
-                #00D4FF 70%, #00ffff 85%, #00D4FF 100%
-            );
-            background-size: 200% 100%;
-            animation: electric-flow 30s linear infinite;
+            display: none;
         }
 
         .logo {
@@ -128,7 +114,7 @@
         .header-text h2 {
             font-size: 2.2vh;
             font-weight: 500;
-            color: #00b8e6;
+            color: #666666;
             letter-spacing: 0.15vw;
             margin-top: 0.5vh;
         }
@@ -159,7 +145,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 2vh;
             font-weight: 800;
-            color: #00b8e6;
+            color: #666666;
         }
 
         .weather-display {
@@ -218,8 +204,8 @@
 
         /* Day Headers */
         .day-header {
-            background: linear-gradient(180deg, #00D4FF 0%, #00b8e6 100%);
-            color: #000;
+            background: #f0f0f0;
+            color: #333;
             font-family: 'Montserrat', sans-serif;
             font-size: 2.2vh;
             font-weight: 700;
@@ -230,33 +216,46 @@
             justify-content: center;
             padding: 0.8vh 0;
             border-radius: 0.3vw;
-            box-shadow: 0 0.3vh 0.6vh rgba(0, 212, 255, 0.3);
-            animation: electric-pulse 20s ease-in-out infinite;
+            border: 1px solid #ddd;
         }
 
         .day-header .date {
             font-family: 'Roboto', sans-serif;
             font-size: 1.9vh;
             font-weight: 700;
-            color: #003340;
+            color: #666;
+        }
+
+        /* Current day highlight */
+        .day-header.today {
+            background: #d0d0d0;
+            border: 2px solid #000;
+            font-weight: 800;
+        }
+
+        .meal-cell.today {
+            background: #e8e8e8;
+            border: 2px solid #000;
         }
 
         /* Daily Items Row - V2 only */
         .daily-row {
             grid-column: 2 / -1;
-            background: linear-gradient(90deg, #1a1f25 0%, #252b33 50%, #1a1f25 100%);
+            background: #f5f5f5;
             padding: 0.4vh 1vw;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             gap: 0.6vw;
+            border: 1px solid #ddd;
+            border-radius: 0.3vw;
         }
 
         .daily-row .meal-type {
             font-family: 'Montserrat', sans-serif;
             font-size: 2vh;
             font-weight: 700;
-            color: #cccccc;
+            color: #555;
             letter-spacing: 0.05vw;
             white-space: nowrap;
         }
@@ -265,12 +264,12 @@
             font-family: 'Roboto', sans-serif;
             font-size: 2vh;
             font-weight: 500;
-            color: #888;
+            color: #666;
             letter-spacing: 0.02vw;
         }
 
         .daily-row .daily-items span {
-            color: #00D4FF;
+            color: #000;
             margin: 0 0.3vw;
         }
 
@@ -286,23 +285,20 @@
             writing-mode: vertical-rl;
             text-orientation: mixed;
             transform: rotate(180deg);
-            background: #111;
+            background: #000000;
             color: #fff;
-            border-bottom: 0.4vh solid #00D4FF;
+            border-radius: 0.3vw;
         }
 
         /* Meal Cells */
         .meal-cell {
-            background: linear-gradient(180deg, #1e2328 0%, #161b22 100%);
+            background: #ffffff;
             padding: 0.6vh 0.5vw;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             border-radius: 0.3vw;
-            border-left: 0.15vw solid #2a3038;
-            border-right: 0.15vw solid #2a3038;
-            border-bottom: 0.15vw solid #2a3038;
-            border-top: 0.25vh solid #00D4FF;
+            border: 1px solid #ddd;
             position: relative;
         }
 
@@ -314,10 +310,10 @@
             height: 5vh;
             width: 5vh;
             object-fit: contain;
-            animation: logo-pulse 10s ease-in-out infinite;
-            cursor: pointer;
+            /* animation: logo-pulse 10s ease-in-out infinite; DISABLED */
+            cursor: default;
             z-index: 100;
-            transition: filter 0.3s ease;
+            /* transition: filter 0.3s ease; DISABLED */
         }
 
         .special-logo:hover {
@@ -340,18 +336,17 @@
             font-weight: 500;
             line-height: 1.5;
             padding: 0.1vh 0;
-            color: #ffffff;
+            color: #333;
         }
 
         .view-classic .meal-cell li.highlight {
-            color: #00D4FF;
-            font-weight: 700;
-            font-size: 2.1vh;
-            text-shadow: 0 0 0.8vh rgba(0, 212, 255, 0.6);
+            color: #333;
+            font-weight: 600;
+            font-size: 1.8vh;
         }
 
         .view-classic .meal-cell li.dessert {
-            color: #AF52DE;
+            color: #777;
             font-weight: 500;
         }
 
@@ -366,57 +361,49 @@
             font-weight: 500;
             line-height: 1.4;
             padding: 0.1vh 0;
-            color: #ffffff;
+            color: #333;
         }
 
         .view-v2 .meal-cell li.highlight {
-            color: #00D4FF;
-            font-weight: 700;
-            font-size: 2.3vh;
-            text-shadow: 0 0 0.8vh rgba(0, 212, 255, 0.6);
+            color: #333;
+            font-weight: 600;
+            font-size: 2vh;
         }
 
         .view-v2 .meal-cell li.secondary {
-            color: #888;
+            color: #777;
             font-size: 1.6vh;
             font-weight: 400;
         }
 
         /* Footer */
         .footer-classic {
-            background: #111;
+            background: #f5f5f5;
             padding: 1vh 2vw;
             text-align: center;
             margin-top: 1vh;
             position: relative;
             flex-shrink: 0;
+            border-top: 1px solid #ddd;
         }
 
         .footer-classic::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 0.4vh;
-            background: linear-gradient(90deg, #00D4FF 0%, #00D4FF 20%, transparent 20%, transparent 80%, #00D4FF 80%, #00D4FF 100%);
-            background-size: 200% 100%;
-            animation: electric-flow 40s linear infinite;
+            display: none;
         }
 
         .footer-classic p {
             font-size: 1.6vh;
-            color: #aaa;
+            color: #666;
             letter-spacing: 0.1vw;
         }
 
         .footer-classic span {
-            color: #00D4FF;
+            color: #333;
             font-weight: 600;
         }
 
         .footer-v2 {
-            background: #0d1117;
+            background: #ffffff;
             padding: 0.5vh 2vw;
             flex-shrink: 0;
         }
@@ -448,7 +435,7 @@
             font-size: 1.4vh;
             font-family: 'Montserrat', sans-serif;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            /* transition: opacity 0.5s ease; DISABLED */
             pointer-events: none;
             z-index: 1000;
         }
@@ -460,7 +447,7 @@
 </head>
 <body>
     <div class="scene">
-        <div class="flip-container" id="flipContainer">
+        <div class="flip-container flipped" id="flipContainer">
 
             <!-- ============ CLASSIC VIEW ============ -->
             <div class="view view-classic">
@@ -713,7 +700,7 @@
 
                         <div style="grid-column: 1;"></div>
                         <div class="daily-row">
-                            <span class="meal-type">Served Daily:</span>
+                            <span class="meal-type">Breakfast Daily:</span>
                             <span class="daily-items">Yogurt & Granola <span>•</span> Fresh Fruit <span>•</span> Cereal & Milk <span>•</span> Toast & Bagels <span>•</span> Hard Boiled Eggs <span>•</span> Oatmeal <span>•</span> Smoothies</span>
                         </div>
 
@@ -766,7 +753,7 @@
 
                         <div style="grid-column: 1;"></div>
                         <div class="daily-row">
-                            <span class="meal-type">Served Daily:</span>
+                            <span class="meal-type">Lunch Daily:</span>
                             <span class="daily-items">Grilled Chicken <span>•</span> Salad Bar</span>
                         </div>
 
@@ -804,7 +791,7 @@
 
                         <div style="grid-column: 1;"></div>
                         <div class="daily-row">
-                            <span class="meal-type">Served Daily:</span>
+                            <span class="meal-type">Dinner Daily:</span>
                             <span class="daily-items">Grilled Chicken <span>•</span> Composed Salad <span>•</span> Ice Cream</span>
                         </div>
                     </main>
@@ -819,22 +806,25 @@
 
     <script>
         // Flip toggle
+        const FLIP_ENABLED = false; // Set to true to enable flip functionality
         const flipContainer = document.getElementById('flipContainer');
         const flipHint = document.getElementById('flipHint');
         const chipotleLogos = document.querySelectorAll('.chipotle-toggle');
 
-        chipotleLogos.forEach(logo => {
-            logo.addEventListener('click', (e) => {
-                e.stopPropagation();
-                flipContainer.classList.toggle('flipped');
+        if (FLIP_ENABLED) {
+            chipotleLogos.forEach(logo => {
+                logo.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    flipContainer.classList.toggle('flipped');
+                });
             });
-        });
 
-        // Show hint briefly on load
-        setTimeout(() => {
-            flipHint.classList.add('show');
-            setTimeout(() => flipHint.classList.remove('show'), 4000);
-        }, 2000);
+            // Show hint briefly on load
+            setTimeout(() => {
+                flipHint.classList.add('show');
+                setTimeout(() => flipHint.classList.remove('show'), 4000);
+            }, 2000);
+        }
 
         // Clock
         function updateClock() {
@@ -896,11 +886,43 @@
             return conditions[code] || 'Unknown';
         }
 
+        // Highlight current day
+        function highlightToday() {
+            const now = new Date();
+            const options = { timeZone: 'America/New_York' };
+            const estDate = new Date(now.toLocaleString('en-US', options));
+            const dayOfWeek = estDate.getDay(); // 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+
+            // Map to column index (Mon=0, Tue=1, Wed=2, Thu=3, Fri=4)
+            // Only highlight Mon-Fri (dayOfWeek 1-5)
+            if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+                const colIndex = dayOfWeek - 1; // Mon=0, Tue=1, etc.
+
+                // Get all day headers and meal cells in V2 view
+                const v2 = document.querySelector('.view-v2');
+                const dayHeaders = v2.querySelectorAll('.day-header');
+                const mealCells = v2.querySelectorAll('.meal-cell');
+
+                // Highlight the day header
+                if (dayHeaders[colIndex]) {
+                    dayHeaders[colIndex].classList.add('today');
+                }
+
+                // Highlight meal cells in that column (5 columns, 3 rows = indices 0-4, 5-9, 10-14)
+                [colIndex, colIndex + 5, colIndex + 10].forEach(idx => {
+                    if (mealCells[idx]) {
+                        mealCells[idx].classList.add('today');
+                    }
+                });
+            }
+        }
+
         // Initialize
         updateClock();
         setInterval(updateClock, 1000);
         fetchWeather();
         setInterval(fetchWeather, 600000);
+        highlightToday();
     </script>
 </body>
 </html>
