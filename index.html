@@ -163,10 +163,26 @@
 
         /* Print styles */
         @media print {
-            @page { size: landscape; margin: 0.5cm; }
+            @page { size: landscape; margin: 0.25in; }
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            html, body { height: 100%; overflow: hidden; }
+            .container { height: 100%; max-height: 7.5in; padding: 0.1in !important; }
             .print-btn, .info-panel { display: none !important; }
-            .meal-label { background: #000 !important; color: #fff !important; }
+            .header { padding: 0.1in !important; margin-bottom: 0.1in !important; }
+            .menu-grid { gap: 0.05in !important; }
+            .meal-cell { padding: 0.05in !important; }
+            .meal-cell li { font-size: 8pt !important; line-height: 1.2 !important; }
+            .meal-cell li.highlight { font-size: 9pt !important; }
+            .meal-cell li.secondary { font-size: 7pt !important; }
+            .daily-row { padding: 0.03in 0.1in !important; }
+            .daily-row .meal-type, .daily-row .daily-items { font-size: 8pt !important; }
+            .day-header { font-size: 10pt !important; padding: 0.05in !important; }
+            .day-header .date { font-size: 8pt !important; }
+            .meal-label { font-size: 9pt !important; background: #000 !important; color: #fff !important; }
+            .header-text h1 { font-size: 14pt !important; }
+            .header-text h2 { font-size: 10pt !important; }
+            .logo { height: 0.5in !important; }
+            .special-logo { height: 0.25in !important; width: 0.25in !important; }
             .day-header { background: #f0f0f0 !important; }
             .daily-row { background: #f5f5f5 !important; }
             .header { background: #f5f5f5 !important; }
