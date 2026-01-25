@@ -8,49 +8,55 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { width: 100%; height: 100%; background: #fff; font-family: 'Roboto', sans-serif; color: #333; }
-        .container { width: 100%; height: 100vh; display: flex; flex-direction: column; padding: 6px 10px; }
+        .container { width: 100%; height: 100vh; display: flex; flex-direction: column; padding: 1vh 1.5vw; }
         .header {
             display: flex; align-items: center; justify-content: center;
-            padding: 4px 10px; background: #f5f5f5; border-bottom: 2px solid #333;
-            margin-bottom: 4px; border-radius: 3px; gap: 20px;
+            padding: 0.8vh 2vw; background: #f5f5f5; border-bottom: 0.3vh solid #333;
+            margin-bottom: 0.8vh; border-radius: 0.3vw; gap: 3vw;
         }
-        .logo { height: 36px; }
+        .logo { height: 5vh; }
         .header-text { text-align: center; }
-        .header-text h1 { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: 2px; color: #111; }
-        .header-text h2 { font-size: 10px; font-weight: 500; color: #666; }
+        .header-text h1 { font-family: 'Montserrat', sans-serif; font-size: 2.8vh; font-weight: 800; letter-spacing: 0.3vw; color: #111; }
+        .header-text h2 { font-size: 1.6vh; font-weight: 500; color: #666; }
         .menu-grid {
             display: grid;
-            grid-template-columns: 24px repeat(5, 1fr);
+            grid-template-columns: 3vw repeat(5, 1fr);
             grid-template-rows: auto 1fr 1fr 1fr;
-            gap: 2px; flex: 1;
+            gap: 0.4vh 0.3vw; flex: 1;
         }
         .day-header {
             background: #0038A8; color: #fff; font-family: 'Montserrat', sans-serif;
-            font-size: 9px; font-weight: 700;
+            font-size: 1.6vh; font-weight: 700;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 3px 0; border-radius: 2px;
+            padding: 0.5vh 0; border-radius: 0.3vw;
         }
-        .day-header .date { font-size: 8px; font-weight: 600; color: #aaa; }
+        .day-header .date { font-size: 1.3vh; font-weight: 600; color: #aaa; }
         .meal-label {
             display: flex; align-items: center; justify-content: center;
-            font-family: 'Montserrat', sans-serif; font-size: 7px; font-weight: 700;
+            font-family: 'Montserrat', sans-serif; font-size: 1.2vh; font-weight: 700;
             writing-mode: vertical-rl; transform: rotate(180deg);
-            background: #CE1126; color: #fff; border-radius: 2px;
+            background: #CE1126; color: #fff; border-radius: 0.3vw;
         }
         .meal-cell {
-            background: #fff; padding: 2px 3px;
-            border-radius: 2px; border: 1px solid #ddd; position: relative;
+            background: #fff; padding: 0.5vh 0.6vw;
+            border-radius: 0.3vw; border: 1px solid #ddd; position: relative;
         }
-        .special-logo { position: absolute; top: 1px; right: 1px; height: 18px; width: auto; object-fit: contain; }
+        .special-logo {
+            position: absolute; top: 0.5vh; right: 0.5vw;
+            height: 3.5vh; width: auto; object-fit: contain;
+            padding: 0.3vh;
+            background: rgba(255,255,255,0.9);
+            border-radius: 0.2vw;
+        }
         .meal-cell ul { list-style: none; }
-        .meal-cell li { font-size: 8px; font-weight: 500; line-height: 1.15; color: #333; }
-        .meal-cell li.highlight { color: #0038A8; font-weight: 700; font-size: 8px; }
+        .meal-cell li { font-size: 1.5vh; font-weight: 500; line-height: 1.25; color: #333; }
+        .meal-cell li.highlight { color: #0038A8; font-weight: 700; font-size: 1.6vh; }
         .meal-cell li.dessert { color: #888; font-style: italic; }
         .footer {
-            background: #f5f5f5; padding: 3px 6px; text-align: center;
-            margin-top: 3px; border-radius: 2px;
+            background: #f5f5f5; padding: 0.5vh 1vw; text-align: center;
+            margin-top: 0.5vh; border-radius: 0.3vw;
         }
-        .footer p { font-size: 8px; color: #666; }
+        .footer p { font-size: 1.4vh; color: #666; }
         .footer span { color: #0038A8; font-weight: 600; }
     </style>
 </head>
