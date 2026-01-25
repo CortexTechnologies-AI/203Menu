@@ -162,16 +162,28 @@
         .print-btn:hover { background: #555; }
 
         /* Print styles */
+        @page {
+            size: 11in 8.5in landscape;
+            margin: 0.3cm;
+        }
         @media print {
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
             }
+            html {
+                width: 11in;
+                height: 8.5in;
+            }
+            body {
+                width: 11in;
+                height: 8.5in;
+                margin: 0;
+                padding: 0;
+            }
             .print-btn, .info-panel { display: none !important; }
-            @page { size: landscape; margin: 0.3cm; }
-            html, body { height: 100% !important; overflow: visible !important; }
-            .container { padding: 0.5vh 1vw !important; height: 100% !important; }
+            .container { padding: 0.5vh 1vw !important; height: 100% !important; width: 100% !important; }
             .header { padding: 0.8vh 1vw !important; margin-bottom: 0.8vh !important; background: #f5f5f5 !important; }
             .menu-grid { gap: 0.4vh 0.4vw !important; }
             .meal-label { background: #000 !important; color: #fff !important; }
