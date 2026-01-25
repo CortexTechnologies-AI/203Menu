@@ -371,9 +371,17 @@
         </main>
     </div>
 
-    <button class="print-btn" onclick="window.print()" title="Print Menu">🖨️ Print</button>
+    <button class="print-btn" id="printBtn" title="Print Menu">🖨️ Print</button>
 
     <script>
+        // Safari-compatible print function
+        document.getElementById('printBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            setTimeout(function() {
+                window.print();
+            }, 100);
+        });
+
         function updateClock() {
             const now = new Date();
             const options = { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit', hour12: true };
