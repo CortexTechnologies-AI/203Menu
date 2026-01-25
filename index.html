@@ -445,11 +445,28 @@
             background: #555;
         }
 
-        /* Hide print button and non-essential elements when printing */
+        /* Print styles - fix transforms and layout */
         @media print {
-            .print-btn, .flip-hint, .info-panel { display: none !important; }
-            .container { padding: 0 !important; }
+            /* Hide non-essential elements */
+            .print-btn, .flip-hint, .info-panel, .view-classic { display: none !important; }
+
+            /* Kill all 3D transforms that cause mirroring */
+            .scene, .flip-container, .view, .view-v2 {
+                transform: none !important;
+                position: static !important;
+                perspective: none !important;
+            }
+
+            /* Force landscape */
+            @page { size: landscape; margin: 0.5cm; }
+
+            /* Reset layout */
+            html, body { height: auto !important; overflow: visible !important; }
+            .container { padding: 2vh 2vw !important; height: auto !important; }
             .header { margin-bottom: 1vh !important; }
+
+            /* Ensure content prints */
+            .view-v2 { display: block !important; visibility: visible !important; }
         }
     </style>
 </head>
