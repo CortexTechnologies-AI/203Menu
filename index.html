@@ -422,6 +422,35 @@
         .flip-hint.show {
             opacity: 1;
         }
+
+        /* Print Button */
+        .print-btn {
+            position: fixed;
+            bottom: 2vh;
+            left: 2vw;
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 1vh 1.5vw;
+            border-radius: 0.5vw;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6vh;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1000;
+            transition: background 0.2s;
+        }
+
+        .print-btn:hover {
+            background: #555;
+        }
+
+        /* Hide print button and non-essential elements when printing */
+        @media print {
+            .print-btn, .flip-hint, .info-panel { display: none !important; }
+            .container { padding: 0 !important; }
+            .header { margin-bottom: 1vh !important; }
+        }
     </style>
 </head>
 <body>
@@ -796,6 +825,8 @@
     </div>
 
     <div class="flip-hint" id="flipHint">Click logo to switch view</div>
+
+    <button class="print-btn" onclick="window.print()" title="Print Menu">🖨️ Print</button>
 
     <script>
         // Flip toggle
