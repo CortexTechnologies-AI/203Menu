@@ -8,947 +8,389 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* 203 Sports Academy - Cafeteria Menu
-           Combined view with flip transition */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+            width: 100%; height: 100%; overflow: hidden;
             background: #ffffff;
             font-family: 'Roboto', -apple-system, sans-serif;
             color: #333333;
         }
 
-        /* 3D Flip Container */
-        .scene {
-            width: 100%;
-            height: 100%;
-            perspective: 3000px;
-        }
-
-        .flip-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            /* transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1); DISABLED */
-        }
-
-        .flip-container.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .view {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
-
-        .view-classic {
-            z-index: 2;
-        }
-
-        .view-v2 {
-            transform: rotateY(180deg);
-        }
-
         .container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 5vh 9vw;
-            box-sizing: border-box;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            padding: 2vh 3vw;
             background: #ffffff;
         }
 
         /* Header */
         .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 2vh 3vw;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.5vh 2vw;
             background: #f5f5f5;
             border-bottom: 0.3vh solid #333;
-            margin-bottom: 2vh;
-            position: relative;
-            flex-shrink: 0;
+            margin-bottom: 1.5vh;
             border-radius: 0.3vw;
         }
 
-        .header::before {
-            display: none;
-        }
+        .logo { height: 8vh; width: auto; max-width: 15vw; object-fit: contain; }
 
-        .logo {
-            height: 10vh;
-            width: auto;
-            max-width: 20vw;
-            object-fit: contain;
-        }
-
-        .header-text {
-            text-align: center;
-            flex-grow: 1;
-        }
-
+        .header-text { text-align: center; flex-grow: 1; }
         .header-text h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 4vh;
-            font-weight: 800;
-            letter-spacing: 0.2vw;
-            color: #111111;
-            text-transform: uppercase;
+            font-size: 3.5vh; font-weight: 800;
+            letter-spacing: 0.2vw; color: #111;
         }
-
         .header-text h2 {
-            font-size: 2.2vh;
-            font-weight: 500;
-            color: #666666;
-            letter-spacing: 0.15vw;
-            margin-top: 0.5vh;
+            font-size: 2vh; font-weight: 500;
+            color: #666; margin-top: 0.3vh;
         }
 
         .info-panel {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.5vh;
-            min-width: 12vw;
+            display: flex; flex-direction: column;
+            align-items: flex-end; gap: 0.3vh; min-width: 10vw;
         }
-
-        .clock-display {
-            display: flex;
-            align-items: baseline;
-            gap: 0.3vw;
-        }
-
+        .clock-display { display: flex; align-items: baseline; gap: 0.3vw; }
         .clock-display .time {
             font-family: 'Montserrat', sans-serif;
-            font-size: 4vh;
-            font-weight: 800;
-            color: #111;
-            letter-spacing: 0.1vw;
+            font-size: 3vh; font-weight: 800; color: #111;
         }
-
         .clock-display .ampm {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2vh;
-            font-weight: 800;
-            color: #666666;
+            font-size: 1.5vh; font-weight: 800; color: #666;
         }
-
-        .weather-display {
-            display: flex;
-            align-items: center;
-            gap: 0.5vw;
-        }
-
+        .weather-display { display: flex; align-items: center; gap: 0.5vw; }
         .weather-display .temp {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.5vh;
-            font-weight: 700;
-            color: #111;
+            font-size: 2vh; font-weight: 700; color: #111;
         }
-
         .weather-display .condition {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1.6vh;
-            font-weight: 500;
-            color: #555;
+            font-size: 1.4vh; font-weight: 500; color: #555;
         }
 
-        .sun-display {
-            display: flex;
-            gap: 1vw;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1.4vh;
-            color: #666;
-        }
-
-        .sun-item {
-            display: flex;
-            align-items: center;
-            gap: 0.2vw;
-        }
-
-        /* ============ CLASSIC VIEW GRID ============ */
-        .menu-grid-classic {
-            display: grid;
-            grid-template-columns: 4vw repeat(5, 1fr);
-            grid-template-rows: auto 1fr 1fr 1fr;
-            gap: 0.5vh 0.4vw;
-            flex: 1;
-            min-height: 0;
-        }
-
-        /* ============ V2 VIEW GRID ============ */
-        .menu-grid-v2 {
+        /* Grid */
+        .menu-grid {
             display: grid;
             grid-template-columns: 3vw repeat(5, 1fr);
             grid-template-rows: auto 1fr auto 1fr auto 1fr auto;
-            gap: 1vh 0.8vw;
-            flex: 1;
-            min-height: 0;
+            gap: 0.8vh 0.6vw;
+            flex: 1; min-height: 0;
         }
 
         /* Day Headers */
         .day-header {
-            background: #f0f0f0;
-            color: #333;
+            background: #f0f0f0; color: #333;
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.2vh;
-            font-weight: 700;
-            letter-spacing: 0.1vw;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 0.8vh 0;
-            border-radius: 0.3vw;
+            font-size: 1.8vh; font-weight: 700;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 0.6vh 0; border-radius: 0.3vw;
             border: 1px solid #ddd;
         }
-
         .day-header .date {
             font-family: 'Roboto', sans-serif;
-            font-size: 1.9vh;
-            font-weight: 700;
-            color: #666;
+            font-size: 1.5vh; font-weight: 600; color: #666;
         }
 
-        /* Current day highlight */
-        .day-header.today {
-            background: #d0d0d0;
-            border: 2px solid #000;
-            font-weight: 800;
-        }
-
-        .meal-cell.today {
-            background: #e8e8e8;
-            border: 2px solid #000;
-        }
-
-        /* Daily Items Row - V2 only */
+        /* Daily Row */
         .daily-row {
             grid-column: 2 / -1;
             background: #f5f5f5;
             padding: 0.4vh 1vw;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 0.6vw;
-            border: 1px solid #ddd;
-            border-radius: 0.3vw;
+            display: flex; align-items: center;
+            justify-content: flex-start; gap: 0.6vw;
+            border: 1px solid #ddd; border-radius: 0.3vw;
         }
-
         .daily-row .meal-type {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.7vh;
-            font-weight: 700;
-            color: #555;
-            letter-spacing: 0.05vw;
-            white-space: nowrap;
+            font-size: 1.5vh; font-weight: 700;
+            color: #555; white-space: nowrap;
         }
-
         .daily-row .daily-items {
             font-family: 'Roboto', sans-serif;
-            font-size: 1.7vh;
-            font-weight: 500;
-            color: #666;
-            letter-spacing: 0.02vw;
+            font-size: 1.5vh; font-weight: 500; color: #666;
         }
-
-        .daily-row .daily-items span {
-            color: #000;
-            margin: 0 0.3vw;
-        }
+        .daily-row .daily-items span { color: #000; margin: 0 0.3vw; }
 
         /* Meal Labels */
         .meal-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.7vh;
-            font-weight: 700;
-            letter-spacing: 0.1vw;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
+            font-size: 1.5vh; font-weight: 700;
+            writing-mode: vertical-rl; text-orientation: mixed;
             transform: rotate(180deg);
-            background: #000000;
-            color: #fff;
-            border-radius: 0.3vw;
-            grid-row: span 2;
+            background: #000; color: #fff;
+            border-radius: 0.3vw; grid-row: span 2;
         }
 
         /* Meal Cells */
         .meal-cell {
-            background: #ffffff;
-            padding: 0.6vh 0.5vw;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            border-radius: 0.3vw;
-            border: 1px solid #ddd;
-            position: relative;
+            background: #fff; padding: 0.5vh 0.4vw;
+            display: flex; flex-direction: column;
+            overflow: hidden; border-radius: 0.3vw;
+            border: 1px solid #ddd; position: relative;
+        }
+        .meal-cell ul { list-style: none; }
+        .meal-cell li {
+            font-size: 1.4vh; font-weight: 500;
+            line-height: 1.25; color: #333;
+        }
+        .meal-cell li.highlight {
+            color: #333; font-weight: 600; font-size: 1.5vh;
+        }
+        .meal-cell li.secondary {
+            color: #777; font-size: 1.3vh; font-weight: 400;
         }
 
-        /* Special Day Logos */
+        /* Special Logo */
         .special-logo {
-            position: absolute;
-            top: 0.5vh;
-            right: 0.5vw;
-            height: 3.5vh;
-            width: 3.5vh;
-            object-fit: contain;
-            cursor: default;
-            z-index: 100;
-        }
-
-        .special-logo:hover {
-            filter: brightness(1.3) drop-shadow(0 0 1vh rgba(0, 212, 255, 0.8));
-        }
-
-        /* Menu Items - Classic */
-        .view-classic .meal-cell ul {
-            list-style: none;
-            flex-grow: 1;
-        }
-
-        .view-classic .meal-cell li {
-            font-size: 1.8vh;
-            font-weight: 500;
-            line-height: 1.5;
-            padding: 0.1vh 0;
-            color: #333;
-        }
-
-        .view-classic .meal-cell li.highlight {
-            color: #333;
-            font-weight: 600;
-            font-size: 1.8vh;
-        }
-
-        .view-classic .meal-cell li.dessert {
-            color: #777;
-            font-weight: 500;
-        }
-
-        /* Menu Items - V2 */
-        .view-v2 .meal-cell ul {
-            list-style: none;
-            flex-grow: 1;
-        }
-
-        .view-v2 .meal-cell li {
-            font-size: 1.7vh;
-            font-weight: 500;
-            line-height: 1.3;
-            padding: 0;
-            color: #333;
-        }
-
-        .view-v2 .meal-cell li.highlight {
-            color: #333;
-            font-weight: 600;
-            font-size: 1.7vh;
-        }
-
-        .view-v2 .meal-cell li.secondary {
-            color: #777;
-            font-size: 1.6vh;
-            font-weight: 400;
-        }
-
-        /* Footer */
-        .footer-classic {
-            background: #f5f5f5;
-            padding: 1vh 2vw;
-            text-align: center;
-            margin-top: 1vh;
-            position: relative;
-            flex-shrink: 0;
-            border-top: 1px solid #ddd;
-        }
-
-        .footer-classic::before {
-            display: none;
-        }
-
-        .footer-classic p {
-            font-size: 1.6vh;
-            color: #666;
-            letter-spacing: 0.1vw;
-        }
-
-        .footer-classic span {
-            color: #333;
-            font-weight: 600;
-        }
-
-        .footer-v2 {
-            background: #ffffff;
-            padding: 0.5vh 2vw;
-            flex-shrink: 0;
-        }
-
-        /* Flip indicator hint */
-        .flip-hint {
-            position: fixed;
-            bottom: 2vh;
-            right: 2vw;
-            background: rgba(0, 212, 255, 0.2);
-            color: #00D4FF;
-            padding: 0.8vh 1.5vw;
-            border-radius: 0.5vw;
-            font-size: 1.4vh;
-            font-family: 'Montserrat', sans-serif;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        .flip-hint.show {
-            opacity: 1;
+            position: absolute; top: 0.4vh; right: 0.4vw;
+            height: 3vh; width: 3vh;
+            object-fit: contain; z-index: 100;
         }
 
         /* Print Button */
         .print-btn {
-            position: fixed;
-            bottom: 2vh;
-            left: 2vw;
-            background: #333;
-            color: #fff;
-            border: none;
-            padding: 1vh 1.5vw;
-            border-radius: 0.5vw;
+            position: fixed; bottom: 2vh; left: 2vw;
+            background: #333; color: #fff; border: none;
+            padding: 1vh 1.5vw; border-radius: 0.5vw;
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.6vh;
-            font-weight: 600;
-            cursor: pointer;
-            z-index: 1000;
-            transition: background 0.2s;
+            font-size: 1.4vh; font-weight: 600;
+            cursor: pointer; z-index: 1000;
         }
+        .print-btn:hover { background: #555; }
 
-        .print-btn:hover {
-            background: #555;
-        }
-
-        /* Print styles - fix transforms and layout */
+        /* Print styles */
         @media print {
-            /* Hide non-essential elements */
-            .print-btn, .flip-hint, .info-panel, .view-classic { display: none !important; }
-
-            /* Kill all 3D transforms that cause mirroring */
-            .scene, .flip-container, .view, .view-v2 {
-                transform: none !important;
-                position: static !important;
-                perspective: none !important;
-            }
-
-            /* Force landscape */
+            .print-btn, .info-panel { display: none !important; }
             @page { size: landscape; margin: 0.5cm; }
-
-            /* Reset layout */
             html, body { height: auto !important; overflow: visible !important; }
-            .container { padding: 2vh 2vw !important; height: auto !important; }
-            .header { margin-bottom: 1vh !important; }
-
-            /* Ensure content prints */
-            .view-v2 { display: block !important; visibility: visible !important; }
+            .container { padding: 1vh 2vw !important; height: auto !important; }
         }
     </style>
 </head>
 <body>
-    <div class="scene">
-        <div class="flip-container flipped" id="flipContainer">
-
-            <!-- ============ CLASSIC VIEW ============ -->
-            <div class="view view-classic">
-                <div class="container">
-                    <header class="header">
-                        <img src="assets/203-logo.png" alt="203 Sports Academy" class="logo">
-                        <div class="header-text">
-                            <h1>WEEKLY MENU</h1>
-                            <h2>JANUARY 26 - 30, 2026</h2>
-                        </div>
-                        <div class="info-panel">
-                            <div class="clock-display">
-                                <span class="time clock-time">--:--</span>
-                                <span class="ampm clock-ampm">--</span>
-                            </div>
-                            <div class="weather-display">
-                                <span class="temp weather-temp">--°</span>
-                                <span class="condition weather-condition">Loading...</span>
-                            </div>
-                            <div class="sun-display">
-                                <span class="sun-item">☀️ <span class="sun-rise">--:--</span></span>
-                                <span class="sun-item">🌙 <span class="sun-set">--:--</span></span>
-                            </div>
-                        </div>
-                    </header>
-
-                    <main class="menu-grid-classic">
-                        <div style="grid-column: 1;"></div>
-                        <div class="day-header">MONDAY<span class="date">JAN 26</span></div>
-                        <div class="day-header">TUESDAY<span class="date">JAN 27</span></div>
-                        <div class="day-header">WEDNESDAY<span class="date">JAN 28</span></div>
-                        <div class="day-header">THURSDAY<span class="date">JAN 29</span></div>
-                        <div class="day-header">FRIDAY<span class="date">JAN 30</span></div>
-
-                        <div class="meal-label">BREAKFAST</div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Sausage</li>
-                            <li>French Toast</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                            <li>Yogurt & Granola</li>
-                            <li>Fresh Fruit</li>
-                            <li>Cereal & Milk</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Bacon</li>
-                            <li>Pancakes</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                            <li>Yogurt & Granola</li>
-                            <li>Fresh Fruit</li>
-                            <li>Cereal & Milk</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Sausage</li>
-                            <li>French Toast</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                            <li>Yogurt & Granola</li>
-                            <li>Fresh Fruit</li>
-                            <li>Cereal & Milk</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Bacon</li>
-                            <li>Pancakes</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                            <li>Yogurt & Granola</li>
-                            <li>Fresh Fruit</li>
-                            <li>Cereal & Milk</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Sausage</li>
-                            <li>French Toast</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                            <li>Yogurt & Granola</li>
-                            <li>Fresh Fruit</li>
-                            <li>Cereal & Milk</li>
-                        </ul></div>
-
-                        <div class="meal-label">LUNCH</div>
-                        <div class="meal-cell">
-                            <img src="assets/rangers-logo.png" alt="Chipotle Day" class="special-logo">
-                            <ul>
-                                <li class="highlight">Chipotle Day</li>
-                                <li>Chicken Thighs</li>
-                                <li>Carne Asada</li>
-                                <li>Rice & Quinoa</li>
-                                <li>Black Beans</li>
-                                <li>Peppers & Onions</li>
-                                <li>Guac, Salsa, Queso</li>
-                                <li>Salad Bar</li>
-                            </ul>
-                        </div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Chili</li>
-                            <li>Panini Sandwiches</li>
-                            <li>Grilled Chicken</li>
-                            <li>Chips</li>
-                            <li>Salad Bar</li>
-                            <li>Cookies</li>
-                        </ul></div>
-                        <div class="meal-cell">
-                            <img src="assets/rangers-logo.png" alt="Chipotle Day" class="special-logo">
-                            <ul>
-                                <li class="highlight">Chipotle Day</li>
-                                <li>Chicken Thighs</li>
-                                <li>Carne Asada</li>
-                                <li>Rice & Quinoa</li>
-                                <li>Black Beans</li>
-                                <li>Peppers & Onions</li>
-                                <li>Guac, Salsa, Queso</li>
-                                <li>Salad Bar</li>
-                            </ul>
-                        </div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Burger Day</li>
-                            <li>Soup</li>
-                            <li>Burgers & Buns</li>
-                            <li>Grilled Chicken</li>
-                            <li>Fries</li>
-                            <li>Cheese</li>
-                            <li>Salad Bar</li>
-                            <li>Cookies</li>
-                        </ul></div>
-                        <div class="meal-cell">
-                            <img src="assets/rangers-logo.png" alt="Chipotle Day" class="special-logo">
-                            <ul>
-                                <li class="highlight">Chipotle Day</li>
-                                <li>Chicken Thighs</li>
-                                <li>Carne Asada</li>
-                                <li>Rice & Quinoa</li>
-                                <li>Black Beans</li>
-                                <li>Peppers & Onions</li>
-                                <li>Guac, Salsa, Queso</li>
-                                <li>Salad Bar</li>
-                            </ul>
-                        </div>
-
-                        <div class="meal-label">DINNER</div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Tenderloin Tips</li>
-                            <li>Garlic Mashed</li>
-                            <li>BBQ Glaze</li>
-                            <li>Broccoli</li>
-                            <li>Grilled Chicken</li>
-                            <li>Salad</li>
-                            <li class="dessert">Ice Cream</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Carbonara</li>
-                            <li>Spaghetti</li>
-                            <li>Alfredo & Marinara</li>
-                            <li>Garlic Bread</li>
-                            <li>Grilled Chicken</li>
-                            <li>Salad</li>
-                            <li class="dessert">Ice Cream</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Basil Chicken</li>
-                            <li>Potstickers</li>
-                            <li>Egg Rolls</li>
-                            <li>Fried Rice</li>
-                            <li>Grilled Chicken</li>
-                            <li>Salad</li>
-                            <li class="dessert">Ice Cream</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Bourbon Chicken</li>
-                            <li>Baked Potato</li>
-                            <li>Green Beans</li>
-                            <li>Grilled Chicken</li>
-                            <li>Salad</li>
-                            <li class="dessert">Ice Cream</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Salmon</li>
-                            <li>Lemon Butter Sauce</li>
-                            <li>Potato Wedges</li>
-                            <li>Rice Pilaf</li>
-                            <li>Mixed Vegetables</li>
-                            <li>Salad</li>
-                            <li class="dessert">Ice Cream</li>
-                        </ul></div>
-                    </main>
-
-                    <footer class="footer-classic">
-                        <p><span>Grilled Chicken</span> & <span>Salad Bar</span> available daily • Fresh fruit & beverages at every meal</p>
-                    </footer>
+    <div class="container">
+        <header class="header">
+            <img src="assets/203-logo.png" alt="203 Sports Academy" class="logo">
+            <div class="header-text">
+                <h1>WEEKLY MENU</h1>
+                <h2>JANUARY 26 - 30, 2026</h2>
+            </div>
+            <div class="info-panel">
+                <div class="clock-display">
+                    <span class="time" id="clock-time">--:--</span>
+                    <span class="ampm" id="clock-ampm">--</span>
+                </div>
+                <div class="weather-display">
+                    <span class="temp" id="weather-temp">--°</span>
+                    <span class="condition" id="weather-condition">Loading...</span>
                 </div>
             </div>
+        </header>
 
-            <!-- ============ V2 VIEW ============ -->
-            <div class="view view-v2">
-                <div class="container">
-                    <header class="header">
-                        <img src="assets/203-logo.png" alt="203 Sports Academy" class="logo">
-                        <div class="header-text">
-                            <h1>WEEKLY MENU</h1>
-                            <h2>JANUARY 26 - 30, 2026</h2>
-                        </div>
-                        <div class="info-panel">
-                            <div class="clock-display">
-                                <span class="time clock-time">--:--</span>
-                                <span class="ampm clock-ampm">--</span>
-                            </div>
-                            <div class="weather-display">
-                                <span class="temp weather-temp">--°</span>
-                                <span class="condition weather-condition">Loading...</span>
-                            </div>
-                            <div class="sun-display">
-                                <span class="sun-item">☀️ <span class="sun-rise">--:--</span></span>
-                                <span class="sun-item">🌙 <span class="sun-set">--:--</span></span>
-                            </div>
-                        </div>
-                    </header>
+        <main class="menu-grid">
+            <div></div>
+            <div class="day-header">MONDAY<span class="date">JAN 26</span></div>
+            <div class="day-header">TUESDAY<span class="date">JAN 27</span></div>
+            <div class="day-header">WEDNESDAY<span class="date">JAN 28</span></div>
+            <div class="day-header">THURSDAY<span class="date">JAN 29</span></div>
+            <div class="day-header">FRIDAY<span class="date">JAN 30</span></div>
 
-                    <main class="menu-grid-v2">
-                        <div style="grid-column: 1;"></div>
-                        <div class="day-header">MONDAY<span class="date">JAN 26</span></div>
-                        <div class="day-header">TUESDAY<span class="date">JAN 27</span></div>
-                        <div class="day-header">WEDNESDAY<span class="date">JAN 28</span></div>
-                        <div class="day-header">THURSDAY<span class="date">JAN 29</span></div>
-                        <div class="day-header">FRIDAY<span class="date">JAN 30</span></div>
+            <!-- BREAKFAST -->
+            <div class="meal-label">BREAKFAST</div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Eggs scrambled</li>
+                <li>Eggs Fried</li>
+                <li>Sausage</li>
+                <li>French Toast, syrup</li>
+                <li>breakfast burritos</li>
+                <li>potatoes</li>
+            </ul></div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Eggs scrambled</li>
+                <li>Eggs Fried</li>
+                <li>Bacon</li>
+                <li>Pancakes, Syrup</li>
+                <li>breakfast burritos</li>
+                <li>potatoes</li>
+            </ul></div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Eggs scrambled</li>
+                <li>Eggs Fried</li>
+                <li>Sausage</li>
+                <li>French Toast, syrup</li>
+                <li>breakfast burritos</li>
+                <li>potatoes</li>
+            </ul></div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Eggs scrambled</li>
+                <li>Eggs Fried</li>
+                <li>Bacon</li>
+                <li>Pancakes, Syrup</li>
+                <li>breakfast burritos</li>
+                <li>potatoes</li>
+            </ul></div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Eggs scrambled</li>
+                <li>Eggs Fried</li>
+                <li>Sausage</li>
+                <li>French Toast, Syrup</li>
+                <li>breakfast burritos</li>
+                <li>potatoes</li>
+            </ul></div>
 
-                        <div class="meal-label">BREAKFAST</div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Sausage</li>
-                            <li>French Toast</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Bacon</li>
-                            <li>Pancakes</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Sausage</li>
-                            <li>French Toast</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Bacon</li>
-                            <li>Pancakes</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Eggs & Sausage</li>
-                            <li>French Toast</li>
-                            <li>Breakfast Burritos</li>
-                            <li>Potatoes</li>
-                        </ul></div>
-
-                        <div class="daily-row">
-                            <span class="meal-type">Breakfast Daily:</span>
-                            <span class="daily-items">Yogurt & Granola <span>•</span> Fresh Fruit <span>•</span> Cereal & Milk <span>•</span> Toast & Bagels <span>•</span> Hard Boiled Eggs <span>•</span> Oatmeal <span>•</span> Smoothies</span>
-                        </div>
-
-                        <div class="meal-label">LUNCH</div>
-                        <div class="meal-cell">
-                            <img src="assets/rangers-logo.png" alt="Chipotle Day" class="special-logo">
-                            <ul>
-                                <li class="highlight">Chipotle Day</li>
-                                <li>Chicken Thighs</li>
-                                <li>Carne Asada</li>
-                                <li>Rice & Quinoa</li>
-                                <li>Black Beans</li>
-                                <li>Peppers & Onions</li>
-                                <li class="secondary">Sour Cream, Guac, Salsa, Queso, Tortillas</li>
-                            </ul>
-                        </div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Chili</li>
-                            <li>Panini Sandwiches</li>
-                            <li>Grilled Chicken</li>
-                            <li>Chips</li>
-                            <li>Cookies</li>
-                        </ul></div>
-                        <div class="meal-cell">
-                            <img src="assets/rangers-logo.png" alt="Chipotle Day" class="special-logo">
-                            <ul>
-                                <li class="highlight">Chipotle Day</li>
-                                <li>Chicken Thighs</li>
-                                <li>Carne Asada</li>
-                                <li>Rice & Quinoa</li>
-                                <li>Black Beans</li>
-                                <li>Peppers & Onions</li>
-                                <li class="secondary">Sour Cream, Guac, Salsa, Queso, Tortillas</li>
-                            </ul>
-                        </div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Burger Day</li>
-                            <li>Soup</li>
-                            <li>Burgers & Buns</li>
-                            <li>Fries</li>
-                            <li>Cheese</li>
-                            <li>Cookies</li>
-                        </ul></div>
-                        <div class="meal-cell">
-                            <img src="assets/rangers-logo.png" alt="Chipotle Day" class="special-logo">
-                            <ul>
-                                <li class="highlight">Chipotle Day</li>
-                                <li>Chicken Thighs</li>
-                                <li>Carne Asada</li>
-                                <li>Rice & Quinoa</li>
-                                <li>Black Beans</li>
-                                <li>Peppers & Onions</li>
-                                <li class="secondary">Sour Cream, Guac, Salsa, Queso, Tortillas</li>
-                            </ul>
-                        </div>
-
-                        <div class="daily-row">
-                            <span class="meal-type">Lunch Daily:</span>
-                            <span class="daily-items">Grilled Chicken <span>•</span> Salad Bar</span>
-                        </div>
-
-                        <div class="meal-label">DINNER</div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Tenderloin Tips</li>
-                            <li>Garlic Mashed</li>
-                            <li>BBQ Glaze</li>
-                            <li>Broccoli</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Carbonara</li>
-                            <li>Spaghetti</li>
-                            <li>Alfredo & Marinara</li>
-                            <li>Garlic Bread</li>
-                            <li>Fresh Vegetables</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Basil Chicken</li>
-                            <li>Potstickers</li>
-                            <li>Egg Rolls</li>
-                            <li>Fried Rice</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Bourbon Chicken</li>
-                            <li>Baked Potato</li>
-                            <li>Green Beans</li>
-                            <li class="secondary">Cheese, Bacon, Sour Cream</li>
-                        </ul></div>
-                        <div class="meal-cell"><ul>
-                            <li class="highlight">Salmon</li>
-                            <li>Lemon Butter Sauce</li>
-                            <li>Potato Wedges</li>
-                            <li>Rice Pilaf</li>
-                            <li>Mixed Vegetables</li>
-                            <li class="secondary">Penne a la Vodka</li>
-                        </ul></div>
-
-                        <div class="daily-row">
-                            <span class="meal-type">Dinner Daily:</span>
-                            <span class="daily-items">Grilled Chicken <span>•</span> Composed Salad <span>•</span> Ice Cream</span>
-                        </div>
-                    </main>
-
-                    <footer class="footer-v2"></footer>
-                </div>
+            <!-- Breakfast Daily -->
+            <div class="daily-row">
+                <span class="meal-type">Breakfast Daily:</span>
+                <span class="daily-items">Yogurt, granola <span>•</span> Whole fruit, sliced fruit <span>•</span> Cereal, milk <span>•</span> toast, bagels <span>•</span> hard boiled eggs <span>•</span> oatmeal <span>•</span> smoothies</span>
             </div>
-        </div>
+
+            <!-- LUNCH -->
+            <div class="meal-label">LUNCH</div>
+            <div class="meal-cell">
+                <img src="assets/rangers-logo.png" alt="" class="special-logo">
+                <ul>
+                    <li class="highlight">Chipotle Day</li>
+                    <li>Chicken Thighs</li>
+                    <li>Carne Asada</li>
+                    <li>Brown Rice / White Rice</li>
+                    <li>Quinoa</li>
+                    <li>black beans</li>
+                    <li>peppers/onions</li>
+                    <li class="secondary">sour cream, queso, salsa, guacamole, tortillas</li>
+                </ul>
+            </div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">chili</li>
+                <li>panini sands.</li>
+                <li>Grilled Chicken</li>
+                <li>vickies chips</li>
+                <li>sour cream, cheese</li>
+                <li>salad bar</li>
+                <li>cookies</li>
+            </ul></div>
+            <div class="meal-cell">
+                <img src="assets/rangers-logo.png" alt="" class="special-logo">
+                <ul>
+                    <li class="highlight">Chipotle Day</li>
+                    <li>Chicken Thighs</li>
+                    <li>Carne Asada</li>
+                    <li>Brown Rice / White Rice</li>
+                    <li>Quinoa</li>
+                    <li>black beans</li>
+                    <li>peppers/onions</li>
+                    <li class="secondary">sour cream, queso, salsa, guacamole, tortillas</li>
+                </ul>
+            </div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Burger Day</li>
+                <li>Soup</li>
+                <li>Burgers</li>
+                <li>Grilled Chicken</li>
+                <li>buns, fries, cheese</li>
+                <li>Salad Bar</li>
+                <li>cookies</li>
+            </ul></div>
+            <div class="meal-cell">
+                <img src="assets/rangers-logo.png" alt="" class="special-logo">
+                <ul>
+                    <li class="highlight">Chipotle Day</li>
+                    <li>Chicken Thighs</li>
+                    <li>Carne Asada</li>
+                    <li>Brown Rice / White Rice</li>
+                    <li>Quinoa</li>
+                    <li>black beans</li>
+                    <li>peppers/onions</li>
+                    <li class="secondary">sour cream, queso, salsa, guacamole, tortillas</li>
+                </ul>
+            </div>
+
+            <!-- Lunch Daily -->
+            <div class="daily-row">
+                <span class="meal-type">Lunch Daily:</span>
+                <span class="daily-items">Grilled Chicken <span>•</span> Salad Bar</span>
+            </div>
+
+            <!-- DINNER -->
+            <div class="meal-label">DINNER</div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Tenderloin tips</li>
+                <li>garlic mashed</li>
+                <li>BBQ glaze</li>
+                <li>Broccoli</li>
+            </ul></div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Carbonara</li>
+                <li>spaghetti</li>
+                <li>garlic bread</li>
+                <li>alfredo</li>
+                <li>marinara</li>
+                <li>fresh vegetable</li>
+            </ul></div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Basil Chicken</li>
+                <li>potstickers</li>
+                <li>egg rolls</li>
+                <li>fried rice</li>
+            </ul></div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Burbon chicken</li>
+                <li>baked potato</li>
+                <li>green beans</li>
+                <li class="secondary">cheese, bacon, sour cream</li>
+            </ul></div>
+            <div class="meal-cell"><ul>
+                <li class="highlight">Salmon</li>
+                <li>potato wedges</li>
+                <li>rice pilaf</li>
+                <li>mixed vegetable</li>
+                <li>lemon butter sauce</li>
+                <li class="secondary">penne a la vodka</li>
+            </ul></div>
+
+            <!-- Dinner Daily -->
+            <div class="daily-row">
+                <span class="meal-type">Dinner Daily:</span>
+                <span class="daily-items">Grilled Chicken <span>•</span> Composed Salad <span>•</span> Ice Cream</span>
+            </div>
+        </main>
     </div>
-
-    <div class="flip-hint" id="flipHint">Click logo to switch view</div>
 
     <button class="print-btn" onclick="window.print()" title="Print Menu">🖨️ Print</button>
 
     <script>
-        // Flip toggle
-        const FLIP_ENABLED = false; // Set to true to enable flip functionality
-        const flipContainer = document.getElementById('flipContainer');
-        const flipHint = document.getElementById('flipHint');
-
-        // Clock
         function updateClock() {
             const now = new Date();
-            const options = {
-                timeZone: 'America/New_York',
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true
-            };
+            const options = { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit', hour12: true };
             const timeStr = now.toLocaleTimeString('en-US', options);
             const [time, ampm] = timeStr.split(' ');
-
-            document.querySelectorAll('.clock-time').forEach(el => el.textContent = time);
-            document.querySelectorAll('.clock-ampm').forEach(el => el.textContent = ampm);
+            document.getElementById('clock-time').textContent = time;
+            document.getElementById('clock-ampm').textContent = ampm;
         }
-
-        // Weather
-        const LAT = 41.05, LON = -73.54;
 
         async function fetchWeather() {
             try {
-                const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weather_code&daily=sunrise,sunset&temperature_unit=fahrenheit&timezone=America/New_York`;
+                const url = 'https://api.open-meteo.com/v1/forecast?latitude=41.05&longitude=-73.54&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America/New_York';
                 const response = await fetch(url);
                 const data = await response.json();
-
                 const temp = Math.round(data.current.temperature_2m);
-                document.querySelectorAll('.weather-temp').forEach(el => el.textContent = `${temp}°F`);
-
-                const condition = getWeatherCondition(data.current.weather_code);
-                document.querySelectorAll('.weather-condition').forEach(el => el.textContent = condition);
-
-                const sunrise = formatTime(data.daily.sunrise[0]);
-                const sunset = formatTime(data.daily.sunset[0]);
-                document.querySelectorAll('.sun-rise').forEach(el => el.textContent = sunrise);
-                document.querySelectorAll('.sun-set').forEach(el => el.textContent = sunset);
-
-            } catch (error) {
-                console.error('Weather fetch failed:', error);
-                document.querySelectorAll('.weather-condition').forEach(el => el.textContent = 'Unavailable');
+                document.getElementById('weather-temp').textContent = temp + '°F';
+                const conditions = {
+                    0: 'Clear ☀️', 1: 'Mostly Clear 🌤️', 2: 'Partly Cloudy ⛅', 3: 'Overcast ☁️',
+                    45: 'Foggy 🌫️', 51: 'Drizzle 🌧️', 61: 'Rain 🌧️', 71: 'Snow ❄️', 95: 'Storm ⛈️'
+                };
+                document.getElementById('weather-condition').textContent = conditions[data.current.weather_code] || '';
+            } catch (e) {
+                document.getElementById('weather-condition').textContent = '';
             }
         }
 
-        function formatTime(isoString) {
-            const date = new Date(isoString);
-            return date.toLocaleTimeString('en-US', {
-                hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York'
-            }).replace(' ', '');
-        }
-
-        function getWeatherCondition(code) {
-            const conditions = {
-                0: 'Clear ☀️', 1: 'Mostly Clear 🌤️', 2: 'Partly Cloudy ⛅', 3: 'Overcast ☁️',
-                45: 'Foggy 🌫️', 48: 'Icy Fog 🌫️', 51: 'Light Drizzle 🌧️', 53: 'Drizzle 🌧️',
-                55: 'Heavy Drizzle 🌧️', 61: 'Light Rain 🌧️', 63: 'Rain 🌧️', 65: 'Heavy Rain 🌧️',
-                71: 'Light Snow ❄️', 73: 'Snow ❄️', 75: 'Heavy Snow ❄️',
-                80: 'Light Showers 🌦️', 81: 'Showers 🌦️', 95: 'Thunderstorm ⛈️'
-            };
-            return conditions[code] || 'Unknown';
-        }
-
-        // Highlight current day
-        function highlightToday() {
-            const now = new Date();
-            const options = { timeZone: 'America/New_York' };
-            const estDate = new Date(now.toLocaleString('en-US', options));
-            const dayOfWeek = estDate.getDay(); // 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
-
-            // Map to column index (Mon=0, Tue=1, Wed=2, Thu=3, Fri=4)
-            // Only highlight Mon-Fri (dayOfWeek 1-5)
-            if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-                const colIndex = dayOfWeek - 1; // Mon=0, Tue=1, etc.
-
-                // Get all day headers and meal cells in V2 view
-                const v2 = document.querySelector('.view-v2');
-                const dayHeaders = v2.querySelectorAll('.day-header');
-                const mealCells = v2.querySelectorAll('.meal-cell');
-
-                // Highlight the day header
-                if (dayHeaders[colIndex]) {
-                    dayHeaders[colIndex].classList.add('today');
-                }
-
-                // Highlight meal cells in that column (5 columns, 3 rows = indices 0-4, 5-9, 10-14)
-                [colIndex, colIndex + 5, colIndex + 10].forEach(idx => {
-                    if (mealCells[idx]) {
-                        mealCells[idx].classList.add('today');
-                    }
-                });
-            }
-        }
-
-        // Initialize
         updateClock();
         setInterval(updateClock, 1000);
         fetchWeather();
         setInterval(fetchWeather, 600000);
-        highlightToday();
     </script>
 </body>
 </html>
-<!-- cache bust 1769377143 -->
