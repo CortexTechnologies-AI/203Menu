@@ -166,21 +166,21 @@
             @page { size: landscape; margin: 0.25in; }
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             html, body { height: 100%; overflow: hidden; }
-            .container { height: 100%; max-height: 7.5in; padding: 0.1in !important; }
             .print-btn, .info-panel { display: none !important; }
+            .container { height: 7.5in !important; display: flex !important; flex-direction: column !important; padding: 0.1in !important; }
             .header { padding: 0.1in !important; margin-bottom: 0.1in !important; }
-            .menu-grid { gap: 0.05in !important; }
-            .meal-cell { padding: 0.03in !important; overflow: hidden !important; }
-            .meal-cell li { font-size: 9pt !important; line-height: 1.15 !important; }
+            .menu-grid { flex: 1 !important; gap: 0.05in !important; }
+            .meal-cell { padding: 0.05in !important; }
+            .meal-cell li { font-size: 10pt !important; line-height: 1.3 !important; }
             .meal-cell li.highlight { font-weight: 600 !important; }
-            .meal-cell li.secondary { font-size: 8pt !important; }
-            .daily-row { padding: 0.02in 0.1in !important; }
-            .daily-row .meal-type, .daily-row .daily-items { font-size: 9pt !important; }
-            .day-header { font-size: 10pt !important; padding: 0.03in !important; }
-            .day-header .date { font-size: 8pt !important; }
-            .meal-label { font-size: 9pt !important; background: #000 !important; color: #fff !important; }
-            .header-text h1 { font-size: 16pt !important; }
-            .header-text h2 { font-size: 10pt !important; }
+            .meal-cell li.secondary { font-size: 9pt !important; }
+            .daily-row { padding: 0.03in 0.1in !important; }
+            .daily-row .meal-type, .daily-row .daily-items { font-size: 10pt !important; }
+            .day-header { font-size: 11pt !important; padding: 0.05in !important; }
+            .day-header .date { font-size: 9pt !important; }
+            .meal-label { font-size: 10pt !important; background: #000 !important; color: #fff !important; }
+            .header-text h1 { font-size: 18pt !important; }
+            .header-text h2 { font-size: 11pt !important; }
             .logo { height: 0.5in !important; }
             .special-logo { height: 0.25in !important; width: 0.25in !important; }
             .day-header { background: #f0f0f0 !important; }
