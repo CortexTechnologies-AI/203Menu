@@ -9,164 +9,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            width: 100%; height: 100%; overflow: hidden;
-            background: #ffffff;
-            font-family: 'Roboto', -apple-system, sans-serif;
-            color: #333333;
-        }
-
-        .container {
-            width: 100%; height: 100%;
-            display: flex; flex-direction: column;
-            padding: 2vh 3vw;
-            background: #ffffff;
-        }
-
-        /* Header */
-        .header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 1.5vh 2vw;
-            background: #f5f5f5;
-            border-bottom: 0.3vh solid #333;
-            margin-bottom: 1.5vh;
-            border-radius: 0.3vw;
-        }
-
+        html, body { width: 100%; height: 100%; overflow: hidden; background: #ffffff; font-family: 'Roboto', -apple-system, sans-serif; color: #333333; }
+        .container { width: 100%; height: 100%; display: flex; flex-direction: column; padding: 2vh 3vw; background: #ffffff; }
+        .header { display: flex; align-items: center; justify-content: space-between; padding: 1.5vh 2vw; background: #f5f5f5; border-bottom: 0.3vh solid #333; margin-bottom: 1.5vh; border-radius: 0.3vw; }
         .logo { height: 8vh; width: auto; max-width: 15vw; object-fit: contain; }
-
         .header-text { text-align: center; flex-grow: 1; }
-        .header-text h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3.5vh; font-weight: 800;
-            letter-spacing: 0.2vw; color: #111;
-        }
-        .header-text h2 {
-            font-size: 2vh; font-weight: 500;
-            color: #666; margin-top: 0.3vh;
-        }
-
-        .info-panel {
-            display: flex; flex-direction: column;
-            align-items: flex-end; gap: 0.3vh; min-width: 10vw;
-        }
+        .header-text h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5vh; font-weight: 800; letter-spacing: 0.2vw; color: #111; }
+        .header-text h2 { font-size: 2vh; font-weight: 500; color: #666; margin-top: 0.3vh; }
+        .info-panel { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3vh; min-width: 10vw; }
         .clock-display { display: flex; align-items: baseline; gap: 0.3vw; }
-        .clock-display .time {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3vh; font-weight: 800; color: #111;
-        }
-        .clock-display .ampm {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5vh; font-weight: 800; color: #666;
-        }
+        .clock-display .time { font-family: 'Montserrat', sans-serif; font-size: 3vh; font-weight: 800; color: #111; }
+        .clock-display .ampm { font-family: 'Montserrat', sans-serif; font-size: 1.5vh; font-weight: 800; color: #666; }
         .weather-display { display: flex; align-items: center; gap: 0.5vw; }
-        .weather-display .temp {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2vh; font-weight: 700; color: #111;
-        }
-        .weather-display .condition {
-            font-size: 1.4vh; font-weight: 500; color: #555;
-        }
-
-        /* Grid */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 4vw repeat(5, 1fr);
-            grid-template-rows: auto 1fr auto 1fr auto 1fr auto;
-            gap: 0.6vh 0.5vw;
-            flex: 1; min-height: 0;
-        }
-
-        /* Day Headers */
-        .day-header {
-            background: #f0f0f0; color: #333;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2vh; font-weight: 700;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            padding: 0.8vh 0; border-radius: 0.3vw;
-            border: 1px solid #ddd;
-        }
-        .day-header .date {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1.6vh; font-weight: 600; color: #666;
-        }
-
-        /* Daily Row */
-        .daily-row {
-            grid-column: 2 / -1;
-            background: #f5f5f5;
-            padding: 0.5vh 1vw;
-            display: flex; align-items: center;
-            justify-content: flex-start; gap: 0.6vw;
-            border: 1px solid #ddd; border-radius: 0.3vw;
-        }
-        .daily-row .meal-type {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.7vh; font-weight: 700;
-            color: #555; white-space: nowrap;
-        }
-        .daily-row .daily-items {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1.6vh; font-weight: 500; color: #666;
-        }
+        .weather-display .temp { font-family: 'Montserrat', sans-serif; font-size: 2vh; font-weight: 700; color: #111; }
+        .weather-display .condition { font-size: 1.4vh; font-weight: 500; color: #555; }
+        .menu-grid { display: grid; grid-template-columns: 4vw repeat(5, 1fr); grid-template-rows: auto 1fr auto 1fr auto 1fr auto; gap: 0.6vh 0.5vw; flex: 1; min-height: 0; }
+        .day-header { background: #f0f0f0; color: #333; font-family: 'Montserrat', sans-serif; font-size: 2.2vh; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.8vh 0; border-radius: 0.3vw; border: 1px solid #ddd; }
+        .day-header .date { font-family: 'Roboto', sans-serif; font-size: 1.6vh; font-weight: 600; color: #666; }
+        .daily-row { grid-column: 2 / -1; background: #f5f5f5; padding: 0.5vh 1vw; display: flex; align-items: center; justify-content: flex-start; gap: 0.6vw; border: 1px solid #ddd; border-radius: 0.3vw; }
+        .daily-row .meal-type { font-family: 'Montserrat', sans-serif; font-size: 1.7vh; font-weight: 700; color: #555; white-space: nowrap; }
+        .daily-row .daily-items { font-family: 'Roboto', sans-serif; font-size: 1.6vh; font-weight: 500; color: #666; }
         .daily-row .daily-items span { color: #000; margin: 0 0.3vw; }
-
-        /* Meal Labels */
-        .meal-label {
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8vh; font-weight: 700;
-            writing-mode: vertical-rl; text-orientation: mixed;
-            transform: rotate(180deg);
-            background: #000; color: #fff;
-            border-radius: 0.3vw; grid-row: span 2;
-        }
-
-        /* Meal Cells */
-        .meal-cell {
-            background: #fff; padding: 0.8vh 0.6vw;
-            display: flex; flex-direction: column;
-            overflow: hidden; border-radius: 0.3vw;
-            border: 1px solid #ddd; position: relative;
-        }
+        .meal-label { display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 1.8vh; font-weight: 700; writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); background: #000; color: #fff; border-radius: 0.3vw; grid-row: span 2; }
+        .meal-cell { background: #fff; padding: 0.8vh 0.6vw; display: flex; flex-direction: column; overflow: hidden; border-radius: 0.3vw; border: 1px solid #ddd; position: relative; }
         .meal-cell ul { list-style: none; }
-        .meal-cell li {
-            font-size: 1.8vh; font-weight: 500;
-            line-height: 1.3; color: #333;
-        }
-        .meal-cell li.highlight {
-            font-weight: 600;
-        }
-        .meal-cell li.secondary {
-            color: #666; font-size: 1.6vh;
-        }
-
-        /* Special Logo */
-        .special-logo {
-            position: absolute; top: 0.8vh; right: 0.6vw;
-            height: 3.6vh; width: 3.6vh;
-            object-fit: contain; z-index: 100;
-        }
-
-        /* Print Button */
-        .print-btn {
-            position: fixed; top: 2vh; right: 2vw;
-            background: #333; color: #fff; border: none;
-            padding: 1vh 1.5vw; border-radius: 0.5vw;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4vh; font-weight: 600;
-            cursor: pointer; z-index: 1000;
-        }
-        .print-btn:hover { background: #555; }
-
-        /* Print styles */
+        .meal-cell li { font-size: 1.8vh; font-weight: 500; line-height: 1.3; color: #333; }
+        .meal-cell li.highlight { font-weight: 600; }
+        .meal-cell li.secondary { color: #666; font-size: 1.6vh; }
+        .special-logo { position: absolute; top: 0.8vh; right: 0.6vw; height: 3.6vh; width: 3.6vh; object-fit: contain; z-index: 100; }
         @media print {
             @page { size: landscape; margin: 0.25in; }
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             html, body { height: 100%; overflow: hidden; }
-            .print-btn, .info-panel { display: none !important; }
+            .info-panel { display: none !important; }
             .container { height: 7.5in !important; display: flex !important; flex-direction: column !important; padding: 0.1in !important; }
             .header { padding: 0.1in !important; margin-bottom: 0.1in !important; }
             .menu-grid { flex: 1 !important; gap: 0.05in !important; }
@@ -176,14 +51,13 @@
             .meal-cell li.secondary { font-size: 9pt !important; }
             .daily-row { padding: 0.03in 0.1in !important; }
             .daily-row .meal-type, .daily-row .daily-items { font-size: 10pt !important; }
-            .day-header { font-size: 11pt !important; padding: 0.05in !important; }
+            .day-header { font-size: 11pt !important; padding: 0.05in !important; background: #f0f0f0 !important; }
             .day-header .date { font-size: 9pt !important; }
             .meal-label { font-size: 10pt !important; background: #000 !important; color: #fff !important; }
             .header-text h1 { font-size: 18pt !important; }
             .header-text h2 { font-size: 11pt !important; }
             .logo { height: 0.5in !important; }
             .special-logo { height: 0.25in !important; width: 0.25in !important; }
-            .day-header { background: #f0f0f0 !important; }
             .daily-row { background: #f5f5f5 !important; }
             .header { background: #f5f5f5 !important; }
         }
@@ -192,193 +66,45 @@
 <body>
     <div class="container">
         <header class="header">
-            <img src="assets/203-logo.png" alt="203 Sports Academy" class="logo">
+            <img src="/images/203-logo.png" alt="203 Sports Academy" class="logo">
             <div class="header-text">
                 <h1>WEEKLY MENU</h1>
                 <h2>JANUARY 26 - 30, 2026</h2>
             </div>
             <div class="info-panel">
-                <div class="clock-display">
+                <div class="clock-display" onclick="window.print()" style="cursor:pointer;" title="Click to print">
                     <span class="time" id="clock-time">--:--</span>
                     <span class="ampm" id="clock-ampm">--</span>
                 </div>
                 <div class="weather-display">
                     <span class="temp" id="weather-temp">--°</span>
-                    <span class="condition" id="weather-condition">Loading...</span>
+                    <span class="condition" id="weather-condition"></span>
                 </div>
             </div>
         </header>
-
         <main class="menu-grid">
             <div></div>
-            <div class="day-header">MONDAY<span class="date">JAN 26</span></div>
-            <div class="day-header">TUESDAY<span class="date">JAN 27</span></div>
-            <div class="day-header">WEDNESDAY<span class="date">JAN 28</span></div>
-            <div class="day-header">THURSDAY<span class="date">JAN 29</span></div>
-            <div class="day-header">FRIDAY<span class="date">JAN 30</span></div>
-
-            <!-- BREAKFAST -->
+            <div class="day-header">MONDAY<span class="date">JAN 26</span></div><div class="day-header">TUESDAY<span class="date">JAN 27</span></div><div class="day-header">WEDNESDAY<span class="date">JAN 28</span></div><div class="day-header">THURSDAY<span class="date">JAN 29</span></div><div class="day-header">FRIDAY<span class="date">JAN 30</span></div>
             <div class="meal-label">BREAKFAST</div>
-            <div class="meal-cell"><ul>
-                <li>Eggs Scrambled</li>
-                <li>Eggs Fried</li>
-                <li class="highlight">Sausage</li>
-                <li class="highlight">French Toast, Syrup</li>
-                <li>Breakfast Burritos</li>
-                <li class="highlight">Potatoes</li>
-            </ul></div>
-            <div class="meal-cell"><ul>
-                <li>Eggs Scrambled</li>
-                <li>Eggs Fried</li>
-                <li class="highlight">Bacon</li>
-                <li class="highlight">Pancakes, Syrup</li>
-                <li>Breakfast Burritos</li>
-                <li class="highlight">Potatoes</li>
-            </ul></div>
-            <div class="meal-cell"><ul>
-                <li>Eggs Scrambled</li>
-                <li>Eggs Fried</li>
-                <li class="highlight">Sausage</li>
-                <li class="highlight">French Toast, Syrup</li>
-                <li>Breakfast Burritos</li>
-                <li class="highlight">Potatoes</li>
-            </ul></div>
-            <div class="meal-cell"><ul>
-                <li>Eggs Scrambled</li>
-                <li>Eggs Fried</li>
-                <li class="highlight">Bacon</li>
-                <li class="highlight">Pancakes, Syrup</li>
-                <li>Breakfast Burritos</li>
-                <li class="highlight">Potatoes</li>
-            </ul></div>
-            <div class="meal-cell"><ul>
-                <li>Eggs Scrambled</li>
-                <li>Eggs Fried</li>
-                <li class="highlight">Sausage</li>
-                <li class="highlight">French Toast, Syrup</li>
-                <li>Breakfast Burritos</li>
-                <li class="highlight">Potatoes</li>
-            </ul></div>
-
-            <!-- Breakfast Daily -->
+            <div class="meal-cell"><ul><li class="">Eggs Scrambled</li><li class="">Eggs Fried</li><li class="highlight">Sausage</li><li class="">French Toast, Syrup</li><li class="">Breakfast Burritos</li><li class="highlight">Potatoes</li></ul></div><div class="meal-cell"><ul><li class="">Eggs Scrambled</li><li class="">Eggs Fried</li><li class="highlight">Bacon</li><li class="">Pancakes, Syrup</li><li class="">Breakfast Burritos</li><li class="highlight">Potatoes</li></ul></div><div class="meal-cell"><ul><li class="">Eggs Scrambled</li><li class="">Eggs Fried</li><li class="highlight">Sausage</li><li class="">French Toast, Syrup</li><li class="">Breakfast Burritos</li><li class="highlight">Potatoes</li></ul></div><div class="meal-cell"><ul><li class="">Eggs Scrambled</li><li class="">Eggs Fried</li><li class="highlight">Bacon</li><li class="">Pancakes, Syrup</li><li class="">Breakfast Burritos</li><li class="highlight">Potatoes</li></ul></div><div class="meal-cell"><ul><li class="">Eggs Scrambled</li><li class="">Eggs Fried</li><li class="highlight">Sausage</li><li class="">French Toast, Syrup</li><li class="">Breakfast Burritos</li><li class="highlight">Potatoes</li></ul></div>
             <div class="daily-row">
                 <span class="meal-type">Breakfast Daily:</span>
                 <span class="daily-items">Yogurt, Granola <span>•</span> Whole Fruit, Sliced Fruit <span>•</span> Cereal, Milk <span>•</span> Toast, Bagels <span>•</span> Hard Boiled Eggs <span>•</span> Oatmeal <span>•</span> Smoothies</span>
             </div>
-
-            <!-- LUNCH -->
             <div class="meal-label">LUNCH</div>
-            <div class="meal-cell">
-                <img src="assets/rangers-logo.png" alt="" class="special-logo">
-                <ul>
-                    <li class="highlight">Chipotle Day</li>
-                    <li>Chicken Thighs</li>
-                    <li>Carne Asada</li>
-                    <li>Brown Rice / White Rice</li>
-                    <li>Quinoa</li>
-                    <li>Black Beans</li>
-                    <li>Peppers/Onions</li>
-                    <li class="secondary">Sour Cream, Queso, Salsa, Guacamole, Tortillas</li>
-                </ul>
-            </div>
-            <div class="meal-cell"><ul>
-                <li class="highlight">Chili</li>
-                <li>Panini Sands.</li>
-                <li>Grilled Chicken</li>
-                <li>Ms. Vikies Chips</li>
-                <li>Sour Cream, Cheese</li>
-                <li>Salad Bar</li>
-                <li>Cookies</li>
-            </ul></div>
-            <div class="meal-cell">
-                <img src="assets/rangers-logo.png" alt="" class="special-logo">
-                <ul>
-                    <li class="highlight">Chipotle Day</li>
-                    <li>Chicken Thighs</li>
-                    <li>Carne Asada</li>
-                    <li>Brown Rice / White Rice</li>
-                    <li>Quinoa</li>
-                    <li>Black Beans</li>
-                    <li>Peppers/Onions</li>
-                    <li class="secondary">Sour Cream, Queso, Salsa, Guacamole, Tortillas</li>
-                </ul>
-            </div>
-            <div class="meal-cell"><ul>
-                <li class="highlight">Burger Day</li>
-                <li>Soup</li>
-                <li>Burgers</li>
-                <li>Grilled Chicken</li>
-                <li>Buns, Fries, Cheese</li>
-                <li>Salad Bar</li>
-                <li>Cookies</li>
-            </ul></div>
-            <div class="meal-cell">
-                <img src="assets/rangers-logo.png" alt="" class="special-logo">
-                <ul>
-                    <li class="highlight">Chipotle Day</li>
-                    <li>Chicken Thighs</li>
-                    <li>Carne Asada</li>
-                    <li>Brown Rice / White Rice</li>
-                    <li>Quinoa</li>
-                    <li>Black Beans</li>
-                    <li>Peppers/Onions</li>
-                    <li class="secondary">Sour Cream, Queso, Salsa, Guacamole, Tortillas</li>
-                </ul>
-            </div>
-
-            <!-- Lunch Daily -->
+            <div class="meal-cell"><img src="/images/rangers-logo.png" alt="" class="special-logo"><ul><li class="highlight">Chipotle Day</li><li class="">Chicken Thighs</li><li class="">Carne Asada</li><li class="">Brown Rice / White Rice</li><li class="">Quinoa</li><li class="">Black Beans</li><li class="">Peppers/Onions</li><li class="secondary">Sour Cream, Queso, Salsa, Guacamole, Tortillas</li></ul></div><div class="meal-cell"><ul><li class="highlight">Chili</li><li class="">Panini Sands.</li><li class="">Grilled Chicken</li><li class="">Ms. Vikies Chips</li><li class="">Sour Cream, Cheese</li><li class="">Salad Bar</li><li class="">Cookies</li></ul></div><div class="meal-cell"><img src="/images/rangers-logo.png" alt="" class="special-logo"><ul><li class="highlight">Chipotle Day</li><li class="">Chicken Thighs</li><li class="">Carne Asada</li><li class="">Brown Rice / White Rice</li><li class="">Quinoa</li><li class="">Black Beans</li><li class="">Peppers/Onions</li><li class="secondary">Sour Cream, Queso, Salsa, Guacamole, Tortillas</li></ul></div><div class="meal-cell"><ul><li class="highlight">Burger Day</li><li class="">Soup</li><li class="">Burgers</li><li class="">Grilled Chicken</li><li class="">Buns, Fries, Cheese</li><li class="">Salad Bar</li><li class="">Cookies</li></ul></div><div class="meal-cell"><img src="/images/rangers-logo.png" alt="" class="special-logo"><ul><li class="highlight">Chipotle Day</li><li class="">Chicken Thighs</li><li class="">Carne Asada</li><li class="">Brown Rice / White Rice</li><li class="">Quinoa</li><li class="">Black Beans</li><li class="">Peppers/Onions</li><li class="secondary">Sour Cream, Queso, Salsa, Guacamole, Tortillas</li></ul></div>
             <div class="daily-row">
                 <span class="meal-type">Lunch Daily:</span>
                 <span class="daily-items">Grilled Chicken <span>•</span> Salad Bar</span>
             </div>
-
-            <!-- DINNER -->
             <div class="meal-label">DINNER</div>
-            <div class="meal-cell"><ul>
-                <li class="highlight">Tenderloin Tips</li>
-                <li>Garlic Mashed</li>
-                <li>BBQ Glaze</li>
-                <li>Broccoli</li>
-            </ul></div>
-            <div class="meal-cell"><ul>
-                <li class="highlight">Carbonara</li>
-                <li>Spaghetti</li>
-                <li>Garlic Bread</li>
-                <li>Alfredo</li>
-                <li>Marinara</li>
-                <li>Fresh Vegetable</li>
-            </ul></div>
-            <div class="meal-cell"><ul>
-                <li class="highlight">Basil Chicken</li>
-                <li>Potstickers</li>
-                <li>Egg Rolls</li>
-                <li>Fried Rice</li>
-            </ul></div>
-            <div class="meal-cell"><ul>
-                <li class="highlight">Burbon Chicken</li>
-                <li>Baked Potato</li>
-                <li>Green Beans</li>
-                <li class="secondary">Cheese, Bacon, Sour Cream</li>
-            </ul></div>
-            <div class="meal-cell"><ul>
-                <li class="highlight">Salmon</li>
-                <li>Potato Wedges</li>
-                <li>Rice Pilaf</li>
-                <li>Mixed Vegetable</li>
-                <li>Lemon Butter Sauce</li>
-                <li class="secondary">Penne a la Vodka</li>
-            </ul></div>
-
-            <!-- Dinner Daily -->
+            <div class="meal-cell"><ul><li class="highlight">Tenderloin Tips</li><li class="">Garlic Mashed</li><li class="">BBQ Glaze</li><li class="">Broccoli</li></ul></div><div class="meal-cell"><ul><li class="highlight">Carbonara</li><li class="">Spaghetti</li><li class="">Garlic Bread</li><li class="">Alfredo</li><li class="">Marinara</li><li class="">Fresh Vegetable</li></ul></div><div class="meal-cell"><ul><li class="highlight">Basil Chicken</li><li class="">Potstickers</li><li class="">Egg Rolls</li><li class="">Fried Rice</li></ul></div><div class="meal-cell"><ul><li class="highlight">Burbon Chicken</li><li class="">Baked Potato</li><li class="">Green Beans</li><li class="secondary">Cheese, Bacon, Sour Cream</li></ul></div><div class="meal-cell"><ul><li class="highlight">Salmon</li><li class="">Potato Wedges</li><li class="">Rice Pilaf</li><li class="">Mixed Vegetable</li><li class="">Lemon Butter Sauce</li><li class="secondary">Penne a la Vodka</li></ul></div>
             <div class="daily-row">
                 <span class="meal-type">Dinner Daily:</span>
                 <span class="daily-items">Grilled Chicken <span>•</span> Composed Salad <span>•</span> Ice Cream</span>
             </div>
         </main>
     </div>
-
-    <button class="print-btn" onclick="window.print()">Print</button>
-
     <script>
         function updateClock() {
             const now = new Date();
@@ -388,7 +114,6 @@
             document.getElementById('clock-time').textContent = time;
             document.getElementById('clock-ampm').textContent = ampm;
         }
-
         async function fetchWeather() {
             try {
                 const url = 'https://api.open-meteo.com/v1/forecast?latitude=41.05&longitude=-73.54&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=America/New_York';
@@ -396,16 +121,10 @@
                 const data = await response.json();
                 const temp = Math.round(data.current.temperature_2m);
                 document.getElementById('weather-temp').textContent = temp + '°F';
-                const conditions = {
-                    0: 'Clear ☀️', 1: 'Mostly Clear 🌤️', 2: 'Partly Cloudy ⛅', 3: 'Overcast ☁️',
-                    45: 'Foggy 🌫️', 51: 'Drizzle 🌧️', 61: 'Rain 🌧️', 71: 'Snow ❄️', 95: 'Storm ⛈️'
-                };
+                const conditions = { 0: 'Clear ☀️', 1: 'Mostly Clear 🌤️', 2: 'Partly Cloudy ⛅', 3: 'Overcast ☁️', 45: 'Foggy 🌫️', 51: 'Drizzle 🌧️', 61: 'Rain 🌧️', 71: 'Snow ❄️', 95: 'Storm ⛈️' };
                 document.getElementById('weather-condition').textContent = conditions[data.current.weather_code] || '';
-            } catch (e) {
-                document.getElementById('weather-condition').textContent = '';
-            }
+            } catch (e) { }
         }
-
         updateClock();
         setInterval(updateClock, 1000);
         fetchWeather();
